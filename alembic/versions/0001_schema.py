@@ -16,7 +16,7 @@ def upgrade() -> None:
     op.create_table(
         "countries",
         sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("cca2", sa.String(2), nullable=False, unique=True),
+        sa.Column("cca2", sa.String(2), nullable=False),
         sa.Column("flag", sa.String, nullable=False, server_default=""),
         sa.Column("name_common", sa.String, nullable=False),
         sa.Column("name_official", sa.String, nullable=False),
@@ -32,7 +32,7 @@ def upgrade() -> None:
     op.create_table(
         "languages",
         sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("code", sa.String, nullable=False, unique=True),
+        sa.Column("code", sa.String, nullable=False),
         sa.Column("name", sa.String, nullable=False),
     )
     op.create_index("ix_languages_code", "languages", ["code"], unique=True)
@@ -40,7 +40,7 @@ def upgrade() -> None:
     op.create_table(
         "currencies",
         sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("code", sa.String, nullable=False, unique=True),
+        sa.Column("code", sa.String, nullable=False),
         sa.Column("name", sa.String, nullable=False),
         sa.Column("symbol", sa.String, nullable=False, server_default=""),
     )

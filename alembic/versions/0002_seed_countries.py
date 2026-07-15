@@ -79,7 +79,7 @@ def upgrade() -> None:
             {
                 "id": currency_ids[code],
                 "code": code,
-                "name": info["name"],
+                "name": info.get("name", ""),
                 "symbol": info.get("symbol", ""),
             }
             for code, info in currencies_by_code.items()

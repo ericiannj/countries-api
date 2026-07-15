@@ -20,13 +20,14 @@ class Country(Base):
     subregion: Mapped[str | None] = mapped_column(nullable=True)
 
     languages: Mapped[list["Language"]] = relationship(
-        secondary=country_languages, back_populates="countries"
+        secondary=country_languages, back_populates="countries", order_by="Language.code"
     )
     currencies: Mapped[list["Currency"]] = relationship(
-        secondary=country_currencies, back_populates="countries"
+        secondary=country_currencies, back_populates="countries", order_by="Currency.code"
     )
     borders: Mapped[list["Country"]] = relationship(
         secondary=country_borders,
         primaryjoin="Country.id == country_borders.c.country_id",
         secondaryjoin="Country.id == country_borders.c.border_country_id",
+        order_by="Country.cca2",
     )

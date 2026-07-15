@@ -35,7 +35,7 @@ async def list_countries(
 
     total = (await session.execute(count_query)).scalar_one()
 
-    query = query.order_by(Country.name_common).limit(limit).offset(offset)
+    query = query.order_by(Country.name_common, Country.cca2).limit(limit).offset(offset)
     result = await session.execute(query)
     return list(result.scalars().all()), total
 
